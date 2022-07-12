@@ -19,6 +19,9 @@
        01 array_maximum pic s9(9) value zero.
        01 total pic s9(9) value zero.
        01 array_average pic s9(9) value zero.
+       01 insert_value pic s9(9) value zero.
+       01 insert_position pic s9(9) value zero.
+       01 insert_position_save pic s9(9) value zero.
       * The first thing to do is to build an array of integers.
        procedure division.
            display "Enter number of integers".
@@ -82,9 +85,12 @@
            move zero to integer_array_length.
            move integer_array[0] to array_maximum.
            add 1 to integer_array_length.
+           add 1 to integer_array_length_save.
            perform until integer_array_length is equal to integer_array_length_save
                if (integer_array[integer_array_length] is greater than array_maximum) then
-                   move integer_array[integer_array_length] to array_maximum
+
+                  move integer_array[integer_array_length] to array_maximum
+               end-if
                add 1 to integer_array_length
            end-perform.
            display "The maximum value in the array is " array_maximum.
@@ -103,7 +109,31 @@
            display "The average value in the array is " array_average.
            display "Emter amy key to continue".
            accept anykey.
-          
+
+      *       Inserting items
+
+           display "Enter integer value to insert".
+           accept insert_value.
+           display "Enter any key to continue".
+           accept anykey.
+           display "Enter position in array of insertion".
+           accept insert_position.
+           display "Enter any key to continue".
+           accept anykey.
+           move insert_position to insert_position_save.
+
+           move insert_position to integer_array_length.
+           subtract 1 from integer_array_length.
+      **  Move down the items after the target position to make room for the new item.
+           perform until integer_array_length equal zero
+               move integer_array[integer_array_length] to integer_array[insert_position]
+               subtract 1 from insert_position
+               subtract 1 from integer_array_length
+           end-perform
+      * Insert the new value
+           move insert_value to integer_array[insert_position_save].
+
+
            goback.
            
        end program Program1.
