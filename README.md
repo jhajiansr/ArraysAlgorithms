@@ -1,0 +1,1 @@
+The algorithms for the  Array Algorithms code was taken from that terrific book "Essential Algorithms" by Rod Stephens.  I followed Rod Stephens algorithms when I devloped the COBOL code.  But the COBOL code is my own work.  
